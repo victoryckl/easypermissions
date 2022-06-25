@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     private static final int RC_CAMERA_PERM = 123;
     private static final int RC_LOCATION_CONTACTS_PERM = 124;
+    private static final int RC_WRITE_EXTERNAL_STORAGE = 125;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
         // Button click listener that will request two permissions.
         findViewById(R.id.button_location_and_contacts).setOnClickListener(v -> locationAndContactsTask());
+
+        findViewById(R.id.button_write_external).setOnClickListener(v -> writeExternalTask());
     }
 
     private boolean hasCameraPermission() {
@@ -95,6 +98,19 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                     getString(R.string.rationale_location_contacts),
                     RC_LOCATION_CONTACTS_PERM,
                     LOCATION_AND_CONTACTS);
+        }
+    }
+
+    @AfterPermissionGranted(RC_WRITE_EXTERNAL_STORAGE)
+    public void writeExternalTask() {
+        if (hasStoragePermission()) {
+            Toast.makeText(this, "TODO: Write External Storage things", Toast.LENGTH_LONG).show();
+        } else {
+            EasyPermissions.requestPermissions(
+                    this,
+                    getString(R.string.rationale_write_external),
+                    RC_WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
     }
 

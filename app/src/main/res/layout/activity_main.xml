@@ -22,6 +22,12 @@
         android:layout_height="wrap_content"
         android:text="@string/location_and_contacts" />
 
+    <Button
+        android:id="@+id/button_write_external"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/write_external" />
+
     <fragment
         android:id="@+id/fragment"
         android:name="pub.devrel.easypermissions.sample.MainFragment"
